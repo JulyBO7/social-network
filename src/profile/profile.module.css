@@ -1,11 +1,25 @@
-.App {
-  display: grid;
-  grid-template-columns: 1fr 10fr;
-  grid-template-rows: 1fr 10fr;
-  grid-template-areas: 
-  'a a'
-  'c b';
+
+.profile {
+  grid-area: b;
+  background-color: rgb(174, 233, 233);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

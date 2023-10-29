@@ -1,11 +1,33 @@
-.App {
-  display: grid;
-  grid-template-columns: 1fr 10fr;
-  grid-template-rows: 1fr 10fr;
-  grid-template-areas: 
-  'a a'
-  'c b';
+
+.menu {
+  grid-area: c;
+  background-color: rgb(181, 235, 202);
 }
+a {
+  text-decoration: none;
+}
+li {
+  list-style-type: none;
+}
+ul {
+  padding: 0;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
