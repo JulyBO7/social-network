@@ -1,10 +1,14 @@
 .App {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 10fr;
   grid-template-rows: 1fr 10fr;
   grid-template-areas: 
   'a a'
   'c b';
+  gap: 5px;
 }
 
 

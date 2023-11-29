@@ -1,24 +1,10 @@
 
-.menu {
-  grid-area: c;
-  background-color: rgb(65, 130, 90);
-}
-.item a {
-  text-decoration: none;
-  color: antiquewhite;
+.item img {
+  width: 80px;
+  height: 80px;
 
 }
-.item.active {
-color: rgb(132, 183, 137);
-}
 
-/* li {
-  list-style-type: none;
-}
-ul {
-  padding: 0;
-  
-} */
 
 
 
