@@ -1,5 +1,9 @@
 
 .dialogsItem{
     text-decoration: none;
-    color: rgb(45, 52, 33)
+    color: rgb(45, 52, 33);
+}
+a.dialogsItemActive{
+    text-decoration: none;
+    color: rgb(152, 246, 11)
 }

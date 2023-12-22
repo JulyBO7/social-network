@@ -1,13 +1,14 @@
+import { PostsType } from '../..'
 import { Post } from './post/Post'
 
-export const MyPosts = () => {
+
+
+export const MyPosts: React.FC<{ posts: PostsType }> = ({ posts }) => {
     return (
-            <div>
-                <textarea></textarea>
-                <button>add post</button>
-                <Post message={'Hello!'}/>
-                <Post message={'How are you?'}/>
-                <Post message={'I want will be a frontend developer'}/>
-            </div>
+        <div>
+            <p>My posts:</p>
+            {posts.map(post => <Post post={post} /> )}
+        
+        </div>
     )
 }

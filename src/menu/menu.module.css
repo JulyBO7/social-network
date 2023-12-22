@@ -8,8 +8,8 @@
   color: antiquewhite;
 
 }
-.item.active {
-color: rgb(132, 183, 137);
+a.active {
+color:  rgb(210, 220, 212);
 }
 
 /* li {

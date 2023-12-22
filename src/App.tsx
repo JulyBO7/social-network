@@ -4,15 +4,22 @@ import { Profile } from './profile/Profile';
 import { Menu } from './menu/Menu';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { Communication} from './messages/Communication';
+import { DialogsType, MessagesType, PostsType } from '.';
 
-function App() {
+type AppPropsType = {
+  posts: PostsType
+  dialogs: DialogsType
+  messages: MessagesType
+
+}
+
+const App: React.FC <AppPropsType> = (props) => {
   return (
     <BrowserRouter>
       <div className="App">
         <Header />
-        <Route path='/profile' component={Profile}></Route>
-        <Route path='/messages' component={Communication}></Route>
-      
+        <Route path='/profile' render={()=> <Profile posts={props.posts}/>}></Route>
+        <Route path='/messages' render={()=> <Communication dialogs={props.dialogs} messages={props.messages} />}></Route>
         <Menu />
       </div>
     </BrowserRouter>

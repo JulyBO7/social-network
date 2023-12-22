@@ -5,20 +5,20 @@ export const Menu = () => {
     return (
         <nav className={s.menu}>
             <div className={s.item}>
-                <NavLink to='/profile'>Profile</NavLink>
+                <NavLink to='/profile' className={isActive => isActive ? s.active : ''}> Profile </NavLink>
             </div>
             <div className={s.item}>
-                <NavLink to='/messages'>Messages</NavLink>
+                <NavLink to='/messages' className={isActive => isActive ? s.active : ''}>Messages</NavLink>
             </div>
             <div className={s.item}>
-                <NavLink to='/Music'>Music</NavLink>
-                </div>
+                <NavLink to='/Music' className={isActive => isActive ? s.active : ''}>Music</NavLink>
+            </div>
 
-            <div className={s.item}> 
-                <NavLink to='/news'>News</NavLink>
-                </div>
             <div className={s.item}>
-                <NavLink to='/settings'> Settings</NavLink>
+                <NavLink to='/news' className={isActive => isActive ? s.active : ''}>News</NavLink>
+            </div>
+            <div className={s.item}>
+                <NavLink to='/settings' className={isActive => isActive ? s.active : ''}> Settings</NavLink>
             </div>
 
         </nav >

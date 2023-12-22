@@ -1,12 +1,16 @@
 import s from './profile.module.css'
 import { MyPosts } from './my posts/MyPosts';
+import { ProfileInfo } from './profileInfo/ProfileInfo';
+import { PostsType } from '..';
 
-export const Profile = () => {
+
+export const Profile: React.FC<{posts: PostsType }> = ({posts}) => {
+
     return (
         <section className={s.profile}>
-            <img src="https://www.zdorovieinfo.ru/wp-content/uploads/2018/08/shutterstock_573686731.jpg" alt="back" />
+           <ProfileInfo />
             <div>
-               <MyPosts />
+               <MyPosts posts={posts} />
             </div>
         </section>
     )

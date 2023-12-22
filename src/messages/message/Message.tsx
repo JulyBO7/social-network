@@ -1,15 +1,11 @@
-import { UsersType } from '../Communication'
+import { MessagesType } from '../..'
 import s from './messages.module.css'
 
-type MessagePropsType = {
-    users: UsersType
-}
 
-
-export const Message = ({users}:MessagePropsType ) => {
+export const Message: React.FC<{messages: MessagesType}> = ({messages}) => {
     return (
         <div>
-            {users.map(user =>  <div>{user.message}</div>)} 
+            {messages.map(message =>  <div>{message.message}</div>)} 
         </div>
     )
 }

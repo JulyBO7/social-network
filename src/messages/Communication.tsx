@@ -1,26 +1,22 @@
 import s from './communication.module.css'
-import { Dialogs } from './dialogs/Dialogs'
-import { v1 } from 'uuid'
+import { Dialog } from './dialogs/Dialog'
 import { Message } from './message/Message'
+import { DialogsType, MessagesType } from '..'
 
 
-export type UserType = {
-    id: string
-    name: string
-    message: string
+type CommunicationPropsType = {
+    dialogs: DialogsType
+    messages: MessagesType
+}
+export const Communication: React.FC<CommunicationPropsType> = (props) => {
+    return (
+        <div className={s.dialogs}>
+            <Dialog dialogs={props.dialogs} />
+
+            <Message messages={props.messages} />
+        </div>
+    )
+
 }
 
-export type UsersType = UserType[]
 
-const users: UsersType = [{ id: v1(), name: 'July', message: 'Hello!' },
-{ id: v1(), name: 'Nikita', message: 'How are you?' },
-{ id: v1(), name: 'Katya', message: 'Yooy!!!' },
-{ id: v1(), name: 'Dadsha', message: 'I \'m very happy!' }]
-
-export const Communication = () => (
-    <div className={s.dialogs}>
-            <Dialogs users={users} />
-    
-            <Message users={users} />
-    </div>
-)
