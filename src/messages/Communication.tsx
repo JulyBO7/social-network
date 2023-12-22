@@ -1,19 +1,18 @@
 import s from './communication.module.css'
-import { Dialog } from './dialogs/Dialog'
-import { Message } from './message/Message'
-import { DialogsType, MessagesType } from '..'
+import { Dialogs } from './dialogs/Dialogs'
+import { Messages } from './message/Messages'
+import { DialogsPageType } from '../state/state'
 
 
 type CommunicationPropsType = {
-    dialogs: DialogsType
-    messages: MessagesType
+    state: DialogsPageType
 }
 export const Communication: React.FC<CommunicationPropsType> = (props) => {
     return (
         <div className={s.dialogs}>
-            <Dialog dialogs={props.dialogs} />
+            <Dialogs dialogs={props.state.dialogs} />
 
-            <Message messages={props.messages} />
+            <Messages messages={props.state.messages} />
         </div>
     )
 

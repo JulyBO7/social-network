@@ -1,8 +1,8 @@
-import { MessagesType } from '../..'
+import { MessagesType } from '../../state/state'
 import s from './messages.module.css'
 
 
-export const Message: React.FC<{messages: MessagesType}> = ({messages}) => {
+export const Messages: React.FC<{messages: MessagesType}> = ({messages}) => {
     return (
         <div>
             {messages.map(message =>  <div>{message.message}</div>)} 

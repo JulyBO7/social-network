@@ -7,3 +7,12 @@ a.dialogsItemActive{
     text-decoration: none;
     color: rgb(152, 246, 11)
 }
+.img {
+    width: 50px;
+    border-radius: 25px;
+}
+.imageName {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}

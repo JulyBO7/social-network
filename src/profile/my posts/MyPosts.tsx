@@ -1,4 +1,4 @@
-import { PostsType } from '../..'
+import { PostsType } from '../../state/state'
 import { Post } from './post/Post'
 
 

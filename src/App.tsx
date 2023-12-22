@@ -4,13 +4,10 @@ import { Profile } from './profile/Profile';
 import { Menu } from './menu/Menu';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { Communication} from './messages/Communication';
-import { DialogsType, MessagesType, PostsType } from '.';
+import { StateType } from './state/state';
 
 type AppPropsType = {
-  posts: PostsType
-  dialogs: DialogsType
-  messages: MessagesType
-
+  state: StateType
 }
 
 const App: React.FC <AppPropsType> = (props) => {
@@ -18,8 +15,8 @@ const App: React.FC <AppPropsType> = (props) => {
     <BrowserRouter>
       <div className="App">
         <Header />
-        <Route path='/profile' render={()=> <Profile posts={props.posts}/>}></Route>
-        <Route path='/messages' render={()=> <Communication dialogs={props.dialogs} messages={props.messages} />}></Route>
+        <Route path='/profile' render={()=> <Profile profilePage={props.state.profilePage}/>}></Route>
+        <Route path='/messages' render={()=> <Communication state={props.state.dialogsPage} />}></Route>
         <Menu />
       </div>
     </BrowserRouter>
