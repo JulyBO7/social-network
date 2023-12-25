@@ -1,12 +1,16 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import state from './state/state'
+import state, { addPost, subscriber } from './state/state'
+import { updateNewPostText } from './state/state';
 
 
 
-ReactDOM.render(
-    <App state={state} />,
+const rerenderEntireTree = ()=> {
+  ReactDOM.render(
+    <App state={state} updateNewPostText={updateNewPostText} addPost = {addPost} />,
   document.getElementById('root')
-);
+)
+}
+rerenderEntireTree();
+subscriber(rerenderEntireTree)

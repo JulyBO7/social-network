@@ -8,6 +8,8 @@ import { StateType } from './state/state';
 
 type AppPropsType = {
   state: StateType
+  updateNewPostText: (value: string)=> void
+  addPost: ()=> void
 }
 
 const App: React.FC <AppPropsType> = (props) => {
@@ -15,7 +17,9 @@ const App: React.FC <AppPropsType> = (props) => {
     <BrowserRouter>
       <div className="App">
         <Header />
-        <Route path='/profile' render={()=> <Profile profilePage={props.state.profilePage}/>}></Route>
+        <Route path='/profile' render={()=> <Profile  profilePage={props.state.profilePage} 
+                                                      updateNewPostText={props.updateNewPostText}
+                                                      addPost = {props.addPost} />}></Route>
         <Route path='/messages' render={()=> <Communication state={props.state.dialogsPage} />}></Route>
         <Menu />
       </div>

@@ -1,5 +1,9 @@
-.dialogs{
-    display: flex;
-    justify-content: center;
-    gap: 100px;
+.message{
+    background-color: rgb(211, 240, 220);
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+.message:nth-child(1,3){
+    background-color: rgb(7, 235, 79);
+
 }
