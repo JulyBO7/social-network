@@ -1,4 +1,4 @@
-import { PostType } from '../../../state/state'
+import { PostType } from '../../../state/store'
 import s from './Post.module.css'
 
 

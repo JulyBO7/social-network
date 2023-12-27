@@ -1,4 +1,4 @@
-import { MessagesType } from '../../state/state'
+import { MessagesType } from '../../state/store'
 import s from './message.module.css'
 
 

@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom'
 import s from './dialogs.module.css'
 import React from 'react'
 import image from '../../assets/image/pngtree-original-hand-painted-animal-cute-little-fox-png-image_2626055.jpg'
-import { DialogType, DialogsType } from '../../state/state'
+import { DialogType, DialogsType } from '../../state/store'
 
 
 

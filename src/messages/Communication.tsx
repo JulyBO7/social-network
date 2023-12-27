@@ -1,7 +1,7 @@
 import s from './communication.module.css'
 import { Dialogs } from './dialogs/Dialogs'
 import { Messages } from './message/Messages'
-import { DialogsPageType } from '../state/state'
+import { DialogsPageType } from '../state/store'
 
 
 type CommunicationPropsType = {

@@ -1,4 +1,4 @@
-import { ProfilePageType } from '../../state/state'
+import { AddPostAction, ProfilePageType, UpdateNewPostAction, addPostAC, updateNewPostTextAC } from '../../state/store'
 import { Post } from './post/Post'
 import s from './MyPosts.module.css'
 import React from 'react'
@@ -7,29 +7,29 @@ import { KeyboardEvent } from 'react'
 
 
 export const MyPosts: React.FC<{    profilePage: ProfilePageType, 
-                                    updateNewPostText: (value: string)=> void
-                                    addPost: ()=> void }> = ({ profilePage, updateNewPostText, addPost }) => {
+                                    updateNewPostText: (action: UpdateNewPostAction)=> void
+                                    addPost: (action: AddPostAction)=> void }> = ({ profilePage, updateNewPostText, addPost }) => {
    
     const onClickHeandler = () => {
-        addPost()
+        addPost(addPostAC())
     }
        
     const onKeyPressHeandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.key === 'Enter'){
-            addPost()
+            addPost(addPostAC())
         }
     }
     const refTextarea:React.RefObject<HTMLTextAreaElement> = React.createRef()
     
     const onChangeHeandler = ()=> {
-        updateNewPostText(refTextarea.current ? refTextarea.current.value: '')
+        updateNewPostText(updateNewPostTextAC(refTextarea.current ? refTextarea.current.value : ''))
     }
     return (
         <div>
             <p>My posts:</p>
             <div className={s.buttonTextarea}>
                 <textarea   ref={refTextarea} 
-                            className={s.textarea} 
+                            className={s.textarea}
                             value={profilePage.newPostText}
                             onChange={onChangeHeandler}
                             onKeyDown={onKeyPressHeandler}

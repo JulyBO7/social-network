@@ -4,12 +4,12 @@ import { Profile } from './profile/Profile';
 import { Menu } from './menu/Menu';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { Communication} from './messages/Communication';
-import { StateType } from './state/state';
+import { AddPostAction, StateType, UpdateNewPostAction } from './state/store';
 
 type AppPropsType = {
   state: StateType
-  updateNewPostText: (value: string)=> void
-  addPost: ()=> void
+  updateNewPostText: (action: UpdateNewPostAction)=> void
+  addPost: (action: AddPostAction)=> void
 }
 
 const App: React.FC <AppPropsType> = (props) => {
