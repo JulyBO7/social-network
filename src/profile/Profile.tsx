@@ -1,18 +1,18 @@
 import s from './profile.module.css'
 import { MyPosts } from './my posts/MyPosts';
 import { ProfileInfo } from './profileInfo/ProfileInfo';
-import { AddPostAction, ProfilePageType, UpdateNewPostAction } from '../state/store';
+import { ActionType, AddPostAction, ProfilePageType, UpdateNewPostAction } from '../state/store';
 
 
 export const Profile: React.FC<{    profilePage: ProfilePageType, 
-                                    updateNewPostText: (action: UpdateNewPostAction)=> void, 
-                                    addPost: (action: AddPostAction)=> void }> = ({ profilePage, updateNewPostText, addPost }) => {
+                                    dispatch: (action: ActionType) => void
+                                    }> = ({ profilePage, dispatch }) => {
 
     return (
         <section className={s.profile}>
             <ProfileInfo />
             <div>
-            <MyPosts profilePage={profilePage} updateNewPostText={updateNewPostText} addPost= {addPost}   />
+            <MyPosts profilePage={profilePage} dispatch={dispatch}  />
             </div>
         </section>
     )

@@ -4,12 +4,11 @@ import { Profile } from './profile/Profile';
 import { Menu } from './menu/Menu';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { Communication} from './messages/Communication';
-import { AddPostAction, StateType, UpdateNewPostAction } from './state/store';
+import { ActionType, StateType } from './state/store';
 
 type AppPropsType = {
   state: StateType
-  updateNewPostText: (action: UpdateNewPostAction)=> void
-  addPost: (action: AddPostAction)=> void
+  dispatch: (action: ActionType)=> void
 }
 
 const App: React.FC <AppPropsType> = (props) => {
@@ -18,9 +17,10 @@ const App: React.FC <AppPropsType> = (props) => {
       <div className="App">
         <Header />
         <Route path='/profile' render={()=> <Profile  profilePage={props.state.profilePage} 
-                                                      updateNewPostText={props.updateNewPostText}
-                                                      addPost = {props.addPost} />}></Route>
-        <Route path='/messages' render={()=> <Communication state={props.state.dialogsPage} />}></Route>
+                                                      dispatch={props.dispatch}
+                                                       />}></Route>
+        <Route path='/messages' render={()=> <Communication state={props.state.dialogsPage}
+                                                            dispatch={props.dispatch}/>}></Route>
         <Menu />
       </div>
     </BrowserRouter>

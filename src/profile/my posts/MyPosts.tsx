@@ -1,4 +1,4 @@
-import { AddPostAction, ProfilePageType, UpdateNewPostAction, addPostAC, updateNewPostTextAC } from '../../state/store'
+import { ActionType, AddPostAction, ProfilePageType, UpdateNewPostAction, addPostAC, updateNewPostTextAC } from '../../state/store'
 import { Post } from './post/Post'
 import s from './MyPosts.module.css'
 import React from 'react'
@@ -7,22 +7,22 @@ import { KeyboardEvent } from 'react'
 
 
 export const MyPosts: React.FC<{    profilePage: ProfilePageType, 
-                                    updateNewPostText: (action: UpdateNewPostAction)=> void
-                                    addPost: (action: AddPostAction)=> void }> = ({ profilePage, updateNewPostText, addPost }) => {
+                                    dispatch: (action: ActionType)=> void
+                                   }> = ({ profilePage, dispatch}) => {
    
     const onClickHeandler = () => {
-        addPost(addPostAC())
+        dispatch(addPostAC())
     }
        
     const onKeyPressHeandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.key === 'Enter'){
-            addPost(addPostAC())
+            dispatch(addPostAC())
         }
     }
     const refTextarea:React.RefObject<HTMLTextAreaElement> = React.createRef()
     
     const onChangeHeandler = ()=> {
-        updateNewPostText(updateNewPostTextAC(refTextarea.current ? refTextarea.current.value : ''))
+        dispatch(updateNewPostTextAC(refTextarea.current ? refTextarea.current.value : ''))
     }
     return (
         <div>
