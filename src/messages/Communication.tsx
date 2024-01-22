@@ -1,7 +1,7 @@
 import s from './communication.module.css'
 import { Dialogs } from './dialogs/Dialogs'
 import { Messages } from './message/Messages'
-import { ActionType, DialogsPageType } from '../state/store'
+import { ActionType, DialogsPageType } from '../redux/store'
 
 
 type CommunicationPropsType = {

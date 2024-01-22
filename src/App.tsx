@@ -4,7 +4,7 @@ import { Profile } from './profile/Profile';
 import { Menu } from './menu/Menu';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { Communication} from './messages/Communication';
-import { ActionType, StateType } from './state/store';
+import { ActionType, StateType } from './redux/store';
 
 type AppPropsType = {
   state: StateType

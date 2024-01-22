@@ -1,13 +1,14 @@
-import { ActionType, AddPostAction, ProfilePageType, UpdateNewPostAction, addPostAC, updateNewPostTextAC } from '../../state/store'
+import { addPostAC, updateNewPostTextAC } from '../../redux/profileReducer'
 import { Post } from './post/Post'
 import s from './MyPosts.module.css'
 import React from 'react'
 import { KeyboardEvent } from 'react'
+import { ProfilePageType } from '../../redux/store'
 
 
 
 export const MyPosts: React.FC<{    profilePage: ProfilePageType, 
-                                    dispatch: (action: ActionType)=> void
+                                    dispatch: (action: any)=> void
                                    }> = ({ profilePage, dispatch}) => {
    
     const onClickHeandler = () => {

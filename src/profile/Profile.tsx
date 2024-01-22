@@ -1,11 +1,11 @@
 import s from './profile.module.css'
 import { MyPosts } from './my posts/MyPosts';
 import { ProfileInfo } from './profileInfo/ProfileInfo';
-import { ActionType, AddPostAction, ProfilePageType, UpdateNewPostAction } from '../state/store';
+import { ActionType, ProfilePageType } from '../redux/store';
 
 
 export const Profile: React.FC<{    profilePage: ProfilePageType, 
-                                    dispatch: (action: ActionType) => void
+                                    dispatch: (action:ActionType) => void
                                     }> = ({ profilePage, dispatch }) => {
 
     return (
