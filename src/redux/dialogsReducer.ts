@@ -2,7 +2,23 @@ import { ActionType, DialogsPageType } from "./store";
 
 // type ActionDialogsReducerType = AddMessageAction | UpdateNewTextMessageAction
 
-export const dialogsReducer = (state: DialogsPageType, action: ActionType) : DialogsPageType  => {
+const initialState: DialogsPageType = {
+    dialogs: [
+        { id: 1, name: 'July' },
+        { id: 2, name: 'Nikita' },
+        { id: 3, name: 'Katya' },
+        { id: 4, name: 'Dasha' }
+    ],
+    messages: [
+        { id: 1, message: 'I want to be a frontend developer))' },
+        { id: 2, message: 'I like my job' },
+        { id: 3, message: 'I like working as a massage therapist' },
+        { id: 4, message: 'I want to change my job' }
+    ],
+    newTextMessage: ''
+}
+
+export const dialogsReducer = (state = initialState, action: ActionType) : DialogsPageType  => {
     switch (action.type) {
         case 'ADD-MESSAGE':
             let newMessage = { id: 5, message: state.newTextMessage }
