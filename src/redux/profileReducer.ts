@@ -1,4 +1,4 @@
-import { ActionType, ProfilePageType } from "./store"
+import { AddMessageAction, UpdateNewTextMessageAction } from "./dialogsReducer"
 
 
 // type ActionProfileReducerType = AddPostAction | UpdateNewPostAction
@@ -8,6 +8,9 @@ export type PostType = {
     likesCount: number
 }
 type InitialStateType = typeof initialState 
+
+export type ActionType = AddPostAction | UpdateNewPostAction  | UpdateNewTextMessageAction | AddMessageAction
+
 const initialState = {
     posts: [
         { id: 1, message: 'Hello!', likesCount: 12 },
@@ -16,6 +19,7 @@ const initialState = {
     ] as Array<PostType> ,
     newPostText: ''
 }
+
 
 export const profileReducer = (state = initialState, action: ActionType): InitialStateType => {
     switch (action.type) {

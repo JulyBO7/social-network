@@ -2,15 +2,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { store } from './redux/store-redux';
-import { StoreContext } from './context/StoreContext';
+import { Provider } from 'react-redux';
 
 
 
 const rerenderEntireTree = () => {
   ReactDOM.render(
-    <StoreContext.Provider value={store}>
+    <Provider store={store}>
       <App store={store} />
-    </StoreContext.Provider>,
+    </Provider>,
     document.getElementById('root')
   )
 }

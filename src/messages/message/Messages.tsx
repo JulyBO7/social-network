@@ -6,15 +6,15 @@ import { ActionType, MessageType, MessagesType } from '../../redux/store'
 
 
 export const Messages: React.FC<{updateNewTextMessage: (value: string)=>void,
-                                addNewMessage: ()=> void, 
+                                addMessage: ()=> void, 
                                 messages: Array<MessageType>,
-                                newTextMessage: string    }> = ({updateNewTextMessage,addNewMessage,messages,newTextMessage  }) => {
+                                newTextMessage: string    }> = ({updateNewTextMessage,addMessage,messages,newTextMessage  }) => {
 
         const onChangeUpdateNewTextMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
             updateNewTextMessage(e.currentTarget.value)
         }
         const onClickAddNewMessage = ()=> {
-            addNewMessage()
+            addMessage()
         }
         const onKeyPressAddNewMessage = (e: KeyboardEvent<HTMLTextAreaElement>) => {
             if (e.key === 'Enter') {

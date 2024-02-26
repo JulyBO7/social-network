@@ -2,7 +2,7 @@ import { ActionType} from "./store";
 
 // type ActionDialogsReducerType = AddMessageAction | UpdateNewTextMessageAction
 
-type DialogsType = {
+export type DialogsType = {
     id: number
     name: string
 }

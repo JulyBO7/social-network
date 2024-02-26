@@ -4,13 +4,13 @@ import { StoreType } from '../redux/store';
 import { MyPostsContainer } from './my posts/MyPostsContainer';
 
 
-export const Profile: React.FC<{ store: any }> = ({ store }) => {
+export const Profile: React.FC<{}> = () => {
 
     return (
         <section className={s.profile}>
             <ProfileInfo />
             <div>
-            <MyPostsContainer store={store} />
+            <MyPostsContainer/>
             </div>
         </section>
     )

@@ -5,6 +5,7 @@ import { Menu } from './menu/Menu';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { Communication} from './messages/Communication';
 import { ActionType, StateType, StoreType } from './redux/store';
+import { Users } from './users/Users';
 
 type AppPropsType = {
   store: any
@@ -17,8 +18,9 @@ const App: React.FC <AppPropsType> = (props) => {
     <BrowserRouter>
       <div className="App">
         <Header />
-        <Route path='/profile' render={()=> <Profile store={props.store}/>}></Route>
-        <Route path='/messages' render={()=> <Communication store={props.store}/>}></Route>
+        <Route path='/profile' render={()=> <Profile />}></Route>
+        <Route path='/messages' render={()=> <Communication />}></Route> 
+        <Route path='/users' render={()=> <Users store={props.store}/>}></Route>
         <Menu />
       </div>
     </BrowserRouter>
