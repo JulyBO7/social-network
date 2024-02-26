@@ -4,11 +4,12 @@ import { Profile } from './profile/Profile';
 import { Menu } from './menu/Menu';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { Communication} from './messages/Communication';
-import { ActionType, StateType } from './redux/store';
+import { ActionType, StateType, StoreType } from './redux/store';
 
 type AppPropsType = {
-  state: StateType
-  dispatch: (action: ActionType)=> void
+  store: any
+  // state: StateType
+  // dispatch: (action: ActionType)=> void
 }
 
 const App: React.FC <AppPropsType> = (props) => {
@@ -16,11 +17,8 @@ const App: React.FC <AppPropsType> = (props) => {
     <BrowserRouter>
       <div className="App">
         <Header />
-        <Route path='/profile' render={()=> <Profile  profilePage={props.state.profilePage} 
-                                                      dispatch={props.dispatch}
-                                                       />}></Route>
-        <Route path='/messages' render={()=> <Communication state={props.state.dialogsPage}
-                                                            dispatch={props.dispatch}/>}></Route>
+        <Route path='/profile' render={()=> <Profile store={props.store}/>}></Route>
+        <Route path='/messages' render={()=> <Communication store={props.store}/>}></Route>
         <Menu />
       </div>
     </BrowserRouter>

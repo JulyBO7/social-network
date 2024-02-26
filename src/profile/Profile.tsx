@@ -1,18 +1,16 @@
 import s from './profile.module.css'
-import { MyPosts } from './my posts/MyPosts';
 import { ProfileInfo } from './profileInfo/ProfileInfo';
-import { ActionType, ProfilePageType } from '../redux/store';
+import { StoreType } from '../redux/store';
+import { MyPostsContainer } from './my posts/MyPostsContainer';
 
 
-export const Profile: React.FC<{    profilePage: ProfilePageType, 
-                                    dispatch: (action:ActionType) => void
-                                    }> = ({ profilePage, dispatch }) => {
+export const Profile: React.FC<{ store: any }> = ({ store }) => {
 
     return (
         <section className={s.profile}>
             <ProfileInfo />
             <div>
-            <MyPosts profilePage={profilePage} dispatch={dispatch}  />
+            <MyPostsContainer store={store} />
             </div>
         </section>
     )

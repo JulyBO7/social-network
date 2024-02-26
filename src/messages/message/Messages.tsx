@@ -2,28 +2,30 @@ import { ChangeEvent } from 'react'
 import { addMessageAC, updateNewTextMessageAC } from '../../redux/dialogsReducer'
 import s from './message.module.css'
 import {KeyboardEvent} from 'react'
-import { ActionType, MessagesType } from '../../redux/store'
+import { ActionType, MessageType, MessagesType } from '../../redux/store'
 
 
-export const Messages: React.FC<{   messages: MessagesType, 
-                                    dispatch: (action: ActionType)=> void, 
-                                    newTextMessage: string  }> = ({messages, dispatch, newTextMessage}) => {
+export const Messages: React.FC<{updateNewTextMessage: (value: string)=>void,
+                                addNewMessage: ()=> void, 
+                                messages: Array<MessageType>,
+                                newTextMessage: string    }> = ({updateNewTextMessage,addNewMessage,messages,newTextMessage  }) => {
 
         const onChangeUpdateNewTextMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
-            dispatch(updateNewTextMessageAC(e.currentTarget.value))
+            updateNewTextMessage(e.currentTarget.value)
         }
         const onClickAddNewMessage = ()=> {
-            dispatch(addMessageAC())
+            addNewMessage()
         }
         const onKeyPressAddNewMessage = (e: KeyboardEvent<HTMLTextAreaElement>) => {
             if (e.key === 'Enter') {
-                dispatch(addMessageAC())
+                addMessageAC()
             }
         }
 
         return (
             <div>
-                {messages.map(message => <div className={s.message}> {message.message} </div>)}
+                {messages.map(message => <div key={message.id} className={s.message}> {message.message} </div>)}
+
                 <div className={s.buttonTextarea}>
                     <textarea   className={s.textarea} 
                                 value={newTextMessage}

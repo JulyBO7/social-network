@@ -1,4 +1,4 @@
-import { addPostAC, updateNewPostTextAC } from '../../redux/profileReducer'
+import { PostType, addPostAC, updateNewPostTextAC } from '../../redux/profileReducer'
 import { Post } from './post/Post'
 import s from './MyPosts.module.css'
 import React from 'react'
@@ -7,23 +7,26 @@ import { ProfilePageType } from '../../redux/store'
 
 
 
-export const MyPosts: React.FC<{    profilePage: ProfilePageType, 
-                                    dispatch: (action: any)=> void
-                                   }> = ({ profilePage, dispatch}) => {
-   
+export const MyPosts: React.FC<{    newPostText: string 
+                                    posts: Array<PostType>
+                                    addPost: () => void ,
+                                    updateNewPostText: (value: string)=> void
+                                }> = ({newPostText, posts, addPost, updateNewPostText} ) => {
+                                    
     const onClickHeandler = () => {
-        dispatch(addPostAC())
+        addPost()
     }
        
     const onKeyPressHeandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.key === 'Enter'){
-            dispatch(addPostAC())
+            addPost()
         }
     }
+
     const refTextarea:React.RefObject<HTMLTextAreaElement> = React.createRef()
     
     const onChangeHeandler = ()=> {
-        dispatch(updateNewPostTextAC(refTextarea.current ? refTextarea.current.value : ''))
+        updateNewPostText(refTextarea.current ? refTextarea.current.value : '')
     }
     return (
         <div>
@@ -31,7 +34,7 @@ export const MyPosts: React.FC<{    profilePage: ProfilePageType,
             <div className={s.buttonTextarea}>
                 <textarea   ref={refTextarea} 
                             className={s.textarea}
-                            value={profilePage.newPostText}
+                            value={newPostText}
                             onChange={onChangeHeandler}
                             onKeyDown={onKeyPressHeandler}
                             />
@@ -39,8 +42,13 @@ export const MyPosts: React.FC<{    profilePage: ProfilePageType,
                         onClick={onClickHeandler}
                         > Add post </button>
             </div>
-            {profilePage.posts.map(post => <Post post={post} /> )}
+            {posts.map(post => <Post key={post.id} post={post} /> )}
         
         </div>
     )
-}
+
+
+
+                                }
+
+   
