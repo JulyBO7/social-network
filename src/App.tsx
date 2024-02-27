@@ -6,6 +6,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { Communication} from './messages/Communication';
 import { ActionType, StateType, StoreType } from './redux/store';
 import { Users } from './users/Users';
+import { UsersContainer } from './users/UsersContainer';
 
 type AppPropsType = {
   store: any
@@ -20,7 +21,7 @@ const App: React.FC <AppPropsType> = (props) => {
         <Header />
         <Route path='/profile' render={()=> <Profile />}></Route>
         <Route path='/messages' render={()=> <Communication />}></Route> 
-        <Route path='/users' render={()=> <Users store={props.store}/>}></Route>
+        <Route path='/users' render={()=> <UsersContainer />}></Route>
         <Menu />
       </div>
     </BrowserRouter>

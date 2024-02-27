@@ -1,7 +1,8 @@
 
-type UserItemType = {
+export type UserItemType = {
     name: string
     id: number
+    uniqueUrlName: null
     photos: {
         small: null
         large: null
@@ -10,7 +11,7 @@ type UserItemType = {
     followed: boolean
 }
 
-type UsersActionType = setUsersAction
+export type UsersActionType = setUsersAction
 
 const InitialState: UserItemType[] = []
 
@@ -23,7 +24,6 @@ export const usersReducer = (state = InitialState, action: UsersActionType )=> {
             return state
     }
 }
-
 
 type setUsersAction = ReturnType <typeof setUsersAC>
 
