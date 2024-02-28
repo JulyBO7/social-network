@@ -1,30 +1,38 @@
-import axios from "axios"
-import { UserItemType, setUsersAC } from "../redux/usersReducer"
+import { UserItemType} from "../redux/usersReducer"
 import style from './Users.module.css'
 
 const defaultImage = 'https://cdn-icons-png.flaticon.com/512/3177/3177440.png'
 
-export const Users: React.FC<{users: UserItemType[], setUsers: (users: UserItemType[])=> void }> = ({users, setUsers}) => {
+type PropsType = {
+    users: UserItemType[]
+    totalCount: number
+    pageSize: number
+    currentPage: number
+    changeFollow: (id: number, followed: boolean)=>void
+    setCurrentPage: (currentPage: number) => void
+}
 
-    if ( users.length === 0) {
-        axios.get("https://social-network.samuraijs.com/api/1.0/users")
-        .then((response) => {
-            // debugger
+export const Users: React.FC<PropsType> = (props) => {
 
-            setUsers(response.data.items)
-    })
+    let pagesCount = Math.ceil(props.totalCount / props.pageSize)
+    let pages = []
+    for (let i = 1; i <= pagesCount; i++) {
+        pages.push(i)
     }
 
     return (
         <div>
-            {users.map(u => {
+            {props.users.map(u => {
+                
                 return <div className={style.userItem} key={u.id}>
-                            <img className= {style.userImage} src={u.photos.small ? u.photos.small : defaultImage }></img>
-                            <div>{u.name}</div>
-                            <button className={style.button}>{u.followed ? 'unfollowed' : 'followed'}</button>
-                      </div>
+                    <img className={style.userImage} src={u.photos.small ? u.photos.small : defaultImage}></img>
+                    <div>{u.name}</div>
+                    <button onClick={() => props.changeFollow(u.id, !u.followed)} className={style.button}>{u.followed ? 'unfollowed' : 'followed'}</button>
+                </div>
             })}
-            
+            <div>
+                {pages.map((p, index) => <span key={index} onClick={() => props.setCurrentPage(p)} className={props.currentPage === p ? style.carrentPage : ''}> {p} </span>)}
+            </div>
         </div>
     )
 

@@ -1,20 +1,16 @@
 import './App.css';
-import { Header } from './header/Header';
+import { Header } from './components/header/Header';
 import { Profile } from './profile/Profile';
-import { Menu } from './menu/Menu';
+import { Menu } from './components/header/menu/Menu';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { Communication} from './messages/Communication';
 import { ActionType, StateType, StoreType } from './redux/store';
 import { Users } from './users/Users';
-import { UsersContainer } from './users/UsersContainer';
+import UsersContainer from './users/UsersContainer';
 
-type AppPropsType = {
-  store: any
-  // state: StateType
-  // dispatch: (action: ActionType)=> void
-}
+// type AppPropsType = {store: any }
 
-const App: React.FC <AppPropsType> = (props) => {
+const App = () => {
   return (
     <BrowserRouter>
       <div className="App">

@@ -7,7 +7,7 @@ import { usersReducer } from "./usersReducer";
 const rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
-    users: usersReducer
+    usersPage: usersReducer
 })
 export const store = createStore(rootReducer)
 

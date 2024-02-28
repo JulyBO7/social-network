@@ -3,7 +3,10 @@
     width: 50px; 
 }
 .userItem {
+    display: inline-block;
     margin-top: 20px;
+    margin-right: 20px;
+
     
 }
 .button{
@@ -16,3 +19,6 @@
     background-color: rgb(48, 78, 48);
   
   }
+.carrentPage{
+  font-weight:800;
+}

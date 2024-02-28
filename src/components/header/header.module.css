@@ -2,6 +2,7 @@
 .header{
   grid-area: a;
   background-color: rgb(227, 232, 207);
+  max-height: 100px;
 }
 .header img {
   width: 100px;
