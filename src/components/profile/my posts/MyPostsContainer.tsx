@@ -1,12 +1,12 @@
-import { ActionType, AddPostAction, addPostAC, updateNewPostTextAC } from '../../redux/profileReducer'
+import { ActionType, AddPostAction, addPostAC, updateNewPostTextAC } from '../../../redux/profileReducer'
 import { Post } from './post/Post'
 import s from './MyPosts.module.css'
 import React from 'react'
 import { KeyboardEvent } from 'react'
-import { ProfilePageType, StoreType } from '../../redux/store'
+import { ProfilePageType, StoreType } from '../../../redux/store'
 import { MyPosts } from './MyPosts'
 import { connect } from 'react-redux'
-import { AppRootStateType } from '../../redux/store-redux'
+import { AppRootStateType } from '../../../redux/store-redux'
 
 
 

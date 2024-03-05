@@ -1,7 +1,8 @@
 import { AddMessageAction, UpdateNewTextMessageAction, dialogsReducer } from "./dialogsReducer"
-import { AddPostAction, UpdateNewPostAction, profileReducer } from "./profileReducer"
+import { AddPostAction, UpdateNewPostAction, UserProfileType, profileReducer } from "./profileReducer"
 
 export type ProfilePageType = {
+    userProfile: UserProfileType
     posts: PostsType
     newPostText: string
 }
@@ -46,6 +47,7 @@ export type StoreType = {
 export let store: StoreType = {
     _state: {
         profilePage: {
+            userProfile: {userId: 2, fullName: '', photos: {small: '', large: ''}, aboutMe: null, lookingForAJob: null,lookingForAJobDescription: null },
             posts: [
                 { id: 1, message: 'Hello!', likesCount: 12 },
                 { id: 2, message: 'How are you?', likesCount: 4 },

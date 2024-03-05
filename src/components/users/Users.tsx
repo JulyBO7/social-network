@@ -1,13 +1,16 @@
-import { UserItemType} from "../redux/usersReducer"
+import { UserItemType} from '../../redux/usersReducer'
 import style from './Users.module.css'
+import { NavLink } from 'react-router-dom';
 
 const defaultImage = 'https://cdn-icons-png.flaticon.com/512/3177/3177440.png'
+const proloader = 'https://api.n3med.ru/i/preloader.gif'
 
 type PropsType = {
     users: UserItemType[]
     totalCount: number
     pageSize: number
     currentPage: number
+    isFetching: boolean
     changeFollow: (id: number, followed: boolean)=>void
     setCurrentPage: (currentPage: number) => void
 }
@@ -22,14 +25,21 @@ export const Users: React.FC<PropsType> = (props) => {
 
     return (
         <div>
+            <div  className={style.preloader} >{props.isFetching ? <img src={proloader}/> :  null}</div>
+            <div>
             {props.users.map(u => {
                 
                 return <div className={style.userItem} key={u.id}>
-                    <img className={style.userImage} src={u.photos.small ? u.photos.small : defaultImage}></img>
-                    <div>{u.name}</div>
+                    <NavLink to={`/profile/${u.id}`}>
+                        <img className={style.userImage} src={u.photos.small ? u.photos.small : defaultImage}></img>
+                         <div>{u.name}</div>
+                    </NavLink>
+                    
                     <button onClick={() => props.changeFollow(u.id, !u.followed)} className={style.button}>{u.followed ? 'unfollowed' : 'followed'}</button>
                 </div>
-            })}
+            })} 
+
+            </div>
             <div>
                 {pages.map((p, index) => <span key={index} onClick={() => props.setCurrentPage(p)} className={props.currentPage === p ? style.carrentPage : ''}> {p} </span>)}
             </div>

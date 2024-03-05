@@ -1,9 +1,9 @@
-import { PostType, addPostAC, updateNewPostTextAC } from '../../redux/profileReducer'
+import { PostType, addPostAC, updateNewPostTextAC } from '../../../redux/profileReducer'
 import { Post } from './post/Post'
 import s from './MyPosts.module.css'
 import React from 'react'
 import { KeyboardEvent } from 'react'
-import { ProfilePageType } from '../../redux/store'
+import { ProfilePageType } from '../../../redux/store'
 
 
 
