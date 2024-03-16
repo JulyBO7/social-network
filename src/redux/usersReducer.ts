@@ -2,7 +2,7 @@
 export type UserItemType = {
     name: string
     id: number
-    uniqueUrlName: null
+    // uniqueUrlName: null
     photos: {
         small: null
         large: null
@@ -40,9 +40,11 @@ export const usersReducer = (state = initialState, action: UsersActionType ):Use
         case 'FETCHING': 
          return {...state, isFetching: action.isFetching}
 
-        case 'CHANGE-FOLLOW':
+        case 'FOLLOW':
             return {...state, users: state.users.map(user => user.id === action.id ? {...user, followed: action.followed} : user)}
-
+        case 'FOLLOW':
+                return {...state, users: state.users.map(user => user.id === action.id ? {...user, followed: action.followed} : user)}
+    
 
         default: 
             return state
@@ -67,8 +69,8 @@ export const setTotalCount = (totalCount: number) => {
 export const setCurrentPage = (currentPage: number) => { 
     return {type: 'SET-CURRENT-PAGE', currentPage} as const
 }
-export const changeFollow = (id: number, followed: boolean) => { 
-    return {type: 'CHANGE-FOLLOW', id, followed} as const
+export const setFollow = (id: number, followed: boolean) => { 
+    return {type: 'FOLLOW', id, followed} as const
 }
 export const changeIsFetching = (isFetching: boolean) => { 
     return {type: 'FETCHING', isFetching } as const

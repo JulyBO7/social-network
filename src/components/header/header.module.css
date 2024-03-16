@@ -1,11 +1,20 @@
 
 .header{
+
   grid-area: a;
   background-color: rgb(227, 232, 207);
   max-height: 100px;
 }
 .header img {
   width: 100px;
+}
+.auth{
+  float: right;
+  text-decoration: none;
+  color: green;
+  margin-top: 11px;
+  margin-right: 25px;
+
 }
 
 

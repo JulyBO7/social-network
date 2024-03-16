@@ -5,6 +5,7 @@ import { UserItemType } from '../../redux/usersReducer'
 import axios from "axios"
 import { Users } from "./Users"
 import { changeFollow, changeIsFetching, setCurrentPage, setTotalCount, setUsers } from "../../redux/usersReducer"
+import { socialNetworkApi } from "../../api/socialNetworeApi"
 
 const defaultImage = 'https://cdn-icons-png.flaticon.com/512/3177/3177440.png'
 
@@ -18,7 +19,7 @@ type PropsType = {
     setTotalCount: (totalCount: number) => void
     setCurrentPage: (currentPage: number) => void
     changeFollow: (id: number, fallowed: boolean) => void
-    changeIsFetching: (value: boolean)=>void
+    changeIsFetching: (value: boolean) => void
 
 }
 class UsersContainer extends React.Component<PropsType> {
@@ -27,39 +28,38 @@ class UsersContainer extends React.Component<PropsType> {
     }
     componentDidMount() {
         if (this.props.users.length === 0) {
-            this.props.changeIsFetching (!this.props.isFetching)
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=1`)
+            this.props.changeIsFetching(!this.props.isFetching)
+            socialNetworkApi.setUsers(this.props.pageSize)
                 .then((response) => {
-                    // debugger
                     this.props.setUsers(response.data.items)
                     this.props.setTotalCount(response.data.totalCount)
-                    this.props.changeIsFetching (!this.props.isFetching)
+                    this.props.changeIsFetching(!this.props.isFetching)
                 })
         }
     }
     componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<{}>, snapshot?: any): void {
         if (this.props.currentPage !== prevProps.currentPage) {
-            this.props.changeIsFetching (!this.props.isFetching)
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`)
-                .then(response => { 
-                    this.props.setUsers(response.data.items) 
-                    this.props.changeIsFetching (!this.props.isFetching)
+            this.props.changeIsFetching(!this.props.isFetching)
+            socialNetworkApi.setUsers(this.props.pageSize, this.props.currentPage)
+                .then(response => {
+                    this.props.setUsers(response.data.items)
+                    this.props.changeIsFetching(!this.props.isFetching)
                 })
         }
     }
     render() {
-    
-        return <Users   users={this.props.users} 
-                        totalCount={this.props.totalCount} 
-                        pageSize={this.props.pageSize}
-                        isFetching={this.props.isFetching}
-                        currentPage={this.props.currentPage} 
-                        changeFollow={this.props.changeFollow}
-                        setCurrentPage={this.props.setCurrentPage}/>
+
+        return <Users users={this.props.users}
+            totalCount={this.props.totalCount}
+            pageSize={this.props.pageSize}
+            isFetching={this.props.isFetching}
+            currentPage={this.props.currentPage}
+            changeFollow={this.props.changeFollow}
+            setCurrentPage={this.props.setCurrentPage} />
     }
 }
 
-const mapStateToProps = (state: AppRootStateType)=> {
+const mapStateToProps = (state: AppRootStateType) => {
     return {
         users: state.usersPage.users,
         totalCount: state.usersPage.totalCount,
@@ -79,4 +79,4 @@ const mapStateToProps = (state: AppRootStateType)=> {
 //     }
 // }
 
-export default connect (mapStateToProps, {setUsers, setTotalCount, setCurrentPage, changeFollow, changeIsFetching }) (UsersContainer)
+export default connect(mapStateToProps, { setUsers, setTotalCount, setCurrentPage, changeFollow, changeIsFetching })(UsersContainer)
