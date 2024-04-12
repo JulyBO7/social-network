@@ -1,16 +1,24 @@
 import React from 'react'
 import s from './profileInfo.module.css'
-import { UserProfileType } from '../../../redux/profileReducer'
+import { UserProfile, UserProfileType } from '../../../redux/profileReducer'
+import { ProfileStatus } from './profileStatus/ProfileStatus'
+import { Preloader } from '../../preloader/Preloader'
 
-export const ProfileInfo = (props: UserProfileType) => {
 
+type ProfileInfoPropsType = {
+    profile: UserProfile
+    status: string
+    updateStatus: (statusText: string) => void
+}
+export const ProfileInfo = (props: ProfileInfoPropsType) => {
+    // if (!props.profile) {
+    //     return <Preloader />
+    // }
     return (
         <div>
-            <img src="https://www.zdorovieinfo.ru/wp-content/uploads/2018/08/shutterstock_573686731.jpg" alt="back" />
             <div>
-                <img src={props.photos.large} alt="user" />
-                <p>{props.fullName}</p>
-                <p>{props.aboutMe}</p>
+                <img src={props.profile.photos.large} alt="user" />
+                <ProfileStatus status={props.status} updateStatus={props.updateStatus} />
             </div>
         </div>
     )

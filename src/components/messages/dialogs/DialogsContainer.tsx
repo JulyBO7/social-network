@@ -1,6 +1,5 @@
 import { connect } from "react-redux";
-import { AppRootStateType } from "../../redux/store-redux";
-import { ActionType } from "../../redux/profileReducer";
+import { AppRootStateType } from "../../../redux/store-redux";
 import { Dialogs } from "./Dialogs";
 
 const mapStateToProps = (state: AppRootStateType)=> {

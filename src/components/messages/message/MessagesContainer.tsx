@@ -1,8 +1,8 @@
 import { connect } from "react-redux";
 import { Messages } from "./Messages";
-import { AppRootStateType } from "../../redux/store-redux";
-import { ActionType } from "../../redux/profileReducer";
-import { addMessageAC, updateNewTextMessageAC } from "../../redux/dialogsReducer";
+import { AppRootStateType } from "../../../redux/store-redux";
+import { ActionType } from "../../../redux/profileReducer";
+import { addMessageAC, updateNewTextMessageAC } from "../../../redux/dialogsReducer";
 
 
 

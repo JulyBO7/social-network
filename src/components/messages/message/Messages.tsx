@@ -1,8 +1,8 @@
 import { ChangeEvent } from 'react'
-import { addMessageAC, updateNewTextMessageAC } from '../../redux/dialogsReducer'
+import { addMessageAC, updateNewTextMessageAC } from '../../../redux/dialogsReducer'
 import s from './message.module.css'
 import {KeyboardEvent} from 'react'
-import { ActionType, MessageType, MessagesType } from '../../redux/store'
+import { ActionType, MessageType, MessagesType } from '../../../redux/store'
 
 
 export const Messages: React.FC<{updateNewTextMessage: (value: string)=>void,

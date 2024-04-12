@@ -1,15 +1,13 @@
 import React from "react"
 import { Header } from "./Header"
-import axios from "axios"
 import { connect } from "react-redux"
-import { AuthType, setAuthAC } from "../../redux/authReducer"
+import { setAutnTC } from "../../redux/authReducer"
 import { AppRootStateType } from "../../redux/store-redux"
-import { socialNetworkApi } from "../../api/socialNetworeApi"
 
 export type PropsType = {
     isAuth: boolean
     login: string
-    setAuth: (data: AuthType) => void
+    setAuth: () => void
 }
 
 class HeaderContainer extends React.Component<PropsType>{
@@ -17,11 +15,12 @@ class HeaderContainer extends React.Component<PropsType>{
         super(props)
     }
     componentDidMount(): void {
-        socialNetworkApi.setAuth()
-            .then(res => { 
-                if (res.data.resultCode == 0){
-                    this.props.setAuth(res.data.data)
-                } })
+        this.props.setAuth()
+        // socialNetworkApi.setAuth()
+        //     .then(res => { 
+        //         if (res.data.resultCode == 0){
+        //             this.props.setAuth(res.data.data)
+        //         } })
     }
     render() {
         return <Header {...this.props} />
@@ -35,5 +34,5 @@ const mapStateToProps = (state: AppRootStateType) => {
         login: state.auth.login
     }
 }
-export default connect(mapStateToProps, { setAuth: setAuthAC })(HeaderContainer)
+export default connect(mapStateToProps, { setAuth: setAutnTC })(HeaderContainer)
 

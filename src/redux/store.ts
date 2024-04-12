@@ -1,10 +1,11 @@
 import { AddMessageAction, UpdateNewTextMessageAction, dialogsReducer } from "./dialogsReducer"
-import { AddPostAction, UpdateNewPostAction, UserProfileType, profileReducer } from "./profileReducer"
+import { AddPostActionType, UpdateNewPostActionType, UserProfile, UserProfileType, profileReducer } from "./profileReducer"
 
 export type ProfilePageType = {
-    userProfile: UserProfileType
+    userProfile: UserProfile
     posts: PostsType
     newPostText: string
+    status: string
 }
 export type PostsType = PostType[]
 export type PostType = {
@@ -32,7 +33,7 @@ export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
 }
-export type ActionType = AddPostAction | UpdateNewPostAction | UpdateNewTextMessageAction | AddMessageAction
+export type ActionType = AddPostActionType | UpdateNewPostActionType | UpdateNewTextMessageAction | AddMessageAction
 export type StoreType = {
     _state: StateType
     _callSubscriber: () => void
@@ -53,7 +54,8 @@ export let store: StoreType = {
                 { id: 2, message: 'How are you?', likesCount: 4 },
                 { id: 3, message: 'How is your trainy?', likesCount: 7 }
             ],
-            newPostText: ''
+            newPostText: '',
+            status: ''
         },
         dialogsPage: {
             dialogs: [

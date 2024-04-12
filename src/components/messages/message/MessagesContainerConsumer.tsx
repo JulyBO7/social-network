@@ -1,8 +1,8 @@
-import { addMessageAC, updateNewTextMessageAC } from '../../redux/dialogsReducer'
+import { addMessageAC, updateNewTextMessageAC } from '../../../redux/dialogsReducer'
 import s from './message.module.css'
-import { ActionType, MessagesType } from '../../redux/store'
+import { ActionType, MessagesType } from '../../../redux/store'
 import { Messages } from './Messages'
-import { StoreContext } from '../../context/StoreContext'
+import { StoreContext } from '../../../context/StoreContext'
 
 
 export const MessagesContainerConsumer: React.FC<{}> = ({}) => {

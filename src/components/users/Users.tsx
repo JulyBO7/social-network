@@ -12,12 +12,15 @@ type PropsType = {
     pageSize: number
     currentPage: number
     isFetching: boolean
-    changeFollow: (id: number, followed: boolean) => void
+    toggleFollowingProcess: number []
+    followUser: (id: number) => void
+    unfollowUser: (id: number) => void
     setCurrentPage: (currentPage: number) => void
+    changeFollowingProgress: (userId: number, isProcessing: boolean) => void
+
 }
 
 export const Users: React.FC<PropsType> = (props) => {
-
     let pagesCount = Math.ceil(props.totalCount / props.pageSize)
     let pages = []
     for (let i = 1; i <= pagesCount; i++) {
@@ -36,21 +39,34 @@ export const Users: React.FC<PropsType> = (props) => {
                             <div>{u.name}</div>
                         </NavLink>
                         {u.followed ?
-                            <button onClick={() =>
-                                axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, { withCredentials: true })
-                                    .then(res => {
-                                        props.changeFollow(u.id, !u.followed)
-                                    })
+                            <button onClick={() => {
+                                props.unfollowUser(u.id)
+                                // props.changeFollowingProgress(u.id, true)
+                                // socialNetworkApi.unfollowUser(u.id)
+                                //     .then(res => {
+                                //         if (res.data.resultCode == 0) {
+                                //             props.unfollowUser(u.id, false)
+                                //             props.changeFollowingProgress(u.id, false)
+                                //         }
+                                //     })
                             }
-                                className={style.button}> UNFOLLOW </button>
+                            }
+                                className={style.button} disabled={props.toggleFollowingProcess.some(number => number === u.id)}> UNFOLLOW </button>
 
-                        : <button onClick={() =>
-                            axios.get(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, { withCredentials: true })
-                                .then(res => {
-                                    props.changeFollow(u.id, !u.followed)
-                                })
+                        : <button onClick={() => {
+                            props.followUser(u.id)
+                            // props.changeFollowingProgress(u.id, true)
+                            // socialNetworkApi.followUser(u.id)
+                            //     .then(res => {
+                            //         if(res.data.resultCode == 0){
+                            //             props.followUser(u.id, true)
+                            //             props.changeFollowingProgress(u.id, false)
+
+                            //         }
+                            //     })
+                        } 
                         }
-                            className={style.button}> UNFOLLOW </button>
+                            className={style.button} disabled={props.toggleFollowingProcess.some(number => number === u.id)}> FOLLOW </button>
 
                     }
 
