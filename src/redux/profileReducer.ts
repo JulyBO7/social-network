@@ -1,17 +1,17 @@
 import { Dispatch } from "redux"
-import { AddMessageAction, UpdateNewTextMessageAction } from "./dialogsReducer"
+import { AddMessageAction } from "./dialogsReducer"
 import { profileApi} from "../api/socialNetworeApi"
+import { v1 } from "uuid"
 
 export type PostType = {
-    id: number
+    id: string
     message: string
     likesCount: number
 }
 // type InitialStateType = typeof initialState 
 
-export type ActionType =  AddPostActionType 
-                        | UpdateNewPostActionType
-                        | UpdateNewTextMessageAction 
+export type ProfileActionType =  AddPostActionType 
+                        // | UpdateNewPostActionType
                         | AddMessageAction 
                         | SetUserProfileActionType
                         | SetProfileStatusActionType
@@ -39,27 +39,27 @@ export type UserProfile = UserProfileType
 type ProfileStateType = {
     userProfile: UserProfile
     posts: Array<PostType>
-    newPostText: string
     status: string
 }
                     
 const initialState: ProfileStateType = {
     userProfile:
     { userId: 0, fullName: '', photos: { small: '', large: '' }, aboutMe: null, lookingForAJob: null, lookingForAJobDescription: null },
-    posts: [],
-    newPostText: '',
+    posts: [{
+        id: v1(),
+        message: 'some post...',
+        likesCount: 0
+    }],
     status: ''
 }
 
-export const profileReducer = (state = initialState, action: ActionType): ProfileStateType => {
+export const profileReducer = (state = initialState, action: ProfileActionType): ProfileStateType => {
     switch (action.type) {
         case 'ADD-POST':
-            const newPost = { id: 4, message: state.newPostText, likesCount: 0 }
-            state.newPostText = ''
-            return { ...state, posts: [newPost, ...state.posts,] }
-
-        case 'UPDATE-NEW-POST-TEXT':
-            return { ...state, newPostText: action.text }
+            const newId = v1()
+            const newPost = { id: newId, message: action.newPost, likesCount: 0 }
+            // state.newPostText = ''
+            return { ...state, posts: [newPost, ...state.posts]}
         case 'SET-USER-PROFILE':
             return { ...state, userProfile: action.profile }
         case 'SET-PROFILE-STATUS':
@@ -72,17 +72,17 @@ export const profileReducer = (state = initialState, action: ActionType): Profil
 
 //TypesAction:
 export type AddPostActionType = ReturnType<typeof addPostAC>
-export type UpdateNewPostActionType = ReturnType<typeof updateNewPostTextAC>
+// export type UpdateNewPostActionType = ReturnType<typeof updateNewPostTextAC>
 export type SetUserProfileActionType = ReturnType<typeof setUserProfile>
 export type SetProfileStatusActionType = ReturnType<typeof setProfileStatus >
 export type UpdateStatusActionType = ReturnType<typeof updateStatus >
 
 
 //AC:
-export const addPostAC = () => {return { type: 'ADD-POST' } as const}
-export const updateNewPostTextAC = (text: string) => {
-    return { type: 'UPDATE-NEW-POST-TEXT', text } as const
-}
+export const addPostAC = (newPost: string) => ({ type: 'ADD-POST', newPost}) as const
+// export const updateNewPostTextAC = (text: string) => {
+//     return { type: 'UPDATE-NEW-POST-TEXT', text } as const
+// }
 export const setUserProfile = (profile: UserProfileType) => {
     return {type: 'SET-USER-PROFILE' as const, profile}
 }

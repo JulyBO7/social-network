@@ -1,6 +1,4 @@
-import { addMessageAC, updateNewTextMessageAC } from '../../../redux/dialogsReducer'
-import s from './message.module.css'
-import { ActionType, MessagesType } from '../../../redux/store'
+import { addMessageAC} from '../../../redux/dialogsReducer'
 import { Messages } from './Messages'
 import { StoreContext } from '../../../context/StoreContext'
 
@@ -11,17 +9,14 @@ export const MessagesContainerConsumer: React.FC<{}> = ({}) => {
         <div>
             <StoreContext.Consumer>
                 {(store)=> {
-                       const updateNewTextMessage = (value: string) => {
-                        store.dispatch(updateNewTextMessageAC(value))
-                    }
-                    const addNewMessage = () => {
-                        store.dispatch(addMessageAC())
+                  
+                    const addNewMessage = (newMessage: string) => {
+                        store.dispatch(addMessageAC(newMessage))
                     }
                     
-                    return <Messages updateNewTextMessage={updateNewTextMessage}
+                    return <Messages 
                     addMessage={addNewMessage}
-                    messages={store.getState().dialogsPage.messages}
-                    newTextMessage={store.getState().dialogsPage.newTextMessage} />}}
+                    messages={store.getState().dialogsPage.messages} />}}
                 
             </StoreContext.Consumer>
         </div>

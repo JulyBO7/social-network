@@ -1,30 +1,28 @@
-import { AddMessageAction, UpdateNewTextMessageAction, dialogsReducer } from "./dialogsReducer"
-import { AddPostActionType, UpdateNewPostActionType, UserProfile, UserProfileType, profileReducer } from "./profileReducer"
+import { DialogsActionType, dialogsReducer } from "./dialogsReducer"
+import { ProfileActionType,UserProfile, profileReducer } from "./profileReducer"
 
 export type ProfilePageType = {
     userProfile: UserProfile
     posts: PostsType
-    newPostText: string
     status: string
 }
 export type PostsType = PostType[]
 export type PostType = {
-    id: number
+    id: string
     message: string
     likesCount: number
 }
 export type DialogsPageType = {
     dialogs: DialogsType,
     messages: MessagesType
-    newTextMessage: string
 }
 export type DialogsType = Array<DialogType>
 export type DialogType = {
-    id: number
+    id: string
     name: string
 }
 export type MessageType = {
-    id: number
+    id: string
     message: string
 }
 export type MessagesType = MessageType[]
@@ -33,7 +31,7 @@ export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
 }
-export type ActionType = AddPostActionType | UpdateNewPostActionType | UpdateNewTextMessageAction | AddMessageAction
+type ActionType = ProfileActionType | DialogsActionType
 export type StoreType = {
     _state: StateType
     _callSubscriber: () => void
@@ -50,27 +48,25 @@ export let store: StoreType = {
         profilePage: {
             userProfile: {userId: 2, fullName: '', photos: {small: '', large: ''}, aboutMe: null, lookingForAJob: null,lookingForAJobDescription: null },
             posts: [
-                { id: 1, message: 'Hello!', likesCount: 12 },
-                { id: 2, message: 'How are you?', likesCount: 4 },
-                { id: 3, message: 'How is your trainy?', likesCount: 7 }
+                { id: '1', message: 'Hello!', likesCount: 12 },
+                { id: '2', message: 'How are you?', likesCount: 4 },
+                { id: '3', message: 'How is your trainy?', likesCount: 7 }
             ],
-            newPostText: '',
             status: ''
         },
         dialogsPage: {
             dialogs: [
-                { id: 1, name: 'July' },
-                { id: 2, name: 'Nikita' },
-                { id: 3, name: 'Katya' },
-                { id: 4, name: 'Dasha' }
+                { id: '1', name: 'July' },
+                { id: '2', name: 'Nikita' },
+                { id: '3', name: 'Katya' },
+                { id: '4', name: 'Dasha' }
             ],
             messages: [
-                { id: 1, message: 'I want to be a frontend developer))' },
-                { id: 2, message: 'I like my job' },
-                { id: 3, message: 'I like working as a massage therapist' },
-                { id: 4, message: 'I want to change my job' }
-            ],
-            newTextMessage: ''
+                { id: '1', message: 'I want to be a frontend developer))' },
+                { id: '2', message: 'I like my job' },
+                { id: '3', message: 'I like working as a massage therapist' },
+                { id: '4', message: 'I want to change my job' }
+            ]
         }
     },
     _callSubscriber() {
@@ -86,10 +82,6 @@ export let store: StoreType = {
       
         this._state.profilePage = profileReducer(this._state.profilePage, action)
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
-
-        // this._state.profilePage.newPostText = ''
-        // this._state.dialogsPage.newTextMessage = ''
-
         this._callSubscriber()
 
     } 

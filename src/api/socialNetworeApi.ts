@@ -1,7 +1,6 @@
 import axios from "axios"
 import { UserItemType } from "../redux/usersReducer"
-
-
+import { FormLoginType } from "../components/login/Login"
 
 const settings = {withCredentials: true, baseURL: 'https://social-network.samuraijs.com/api/1.0/' }
 const instanse = axios.create(settings)
@@ -26,6 +25,12 @@ export const usersApi = {
 export const authApi = {
     setAuth(){
         return instanse.get<ResponseType<AuthType>>('auth/me')
+    }, 
+    logIn (payload: FormLoginType){
+        return instanse.post<ResponseType<{userId: number}>>('auth/login', payload )
+    },
+    logOut (){
+        return instanse.delete<ResponseType>('auth/login')
     }
 }
 export const profileApi = {

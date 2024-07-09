@@ -1,40 +1,37 @@
-import { ChangeEvent } from 'react'
-import { addMessageAC, updateNewTextMessageAC } from '../../../redux/dialogsReducer'
 import s from './message.module.css'
-import {KeyboardEvent} from 'react'
-import { ActionType, MessageType, MessagesType } from '../../../redux/store'
+import { MessageType} from '../../../redux/dialogsReducer'
+import { reduxForm, Field, InjectedFormProps } from 'redux-form';
 
+type Props = {
+    addMessage: (newMessage: string)=> void
+    messages: Array<MessageType>
+}
+export const Messages = (props: Props) => {
 
-export const Messages: React.FC<{updateNewTextMessage: (value: string)=>void,
-                                addMessage: ()=> void, 
-                                messages: Array<MessageType>,
-                                newTextMessage: string    }> = ({updateNewTextMessage,addMessage,messages,newTextMessage  }) => {
-
-        const onChangeUpdateNewTextMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
-            updateNewTextMessage(e.currentTarget.value)
+        const addNewMessage = (newMessage: string)=> {
+            props.addMessage(newMessage)
         }
-        const onClickAddNewMessage = ()=> {
-            addMessage()
-        }
-        const onKeyPressAddNewMessage = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-            if (e.key === 'Enter') {
-                addMessageAC()
-            }
-        }
-
+     
         return (
             <div>
-                {messages.map(message => <div key={message.id} className={s.message}> {message.message} </div>)}
+                {props.messages.map(message => <div key={message.id} className={s.message}> {message.message} </div>)}
+                <MessagesFormRedux onSubmit={(value: any)=> addNewMessage(value.message)} />
 
-                <div className={s.buttonTextarea}>
-                    <textarea   className={s.textarea} 
-                                value={newTextMessage}
-                                onChange={onChangeUpdateNewTextMessage}
-                                onKeyPress={onKeyPressAddNewMessage}
-                                placeholder='Enter your text' />
-                    <button className={s.button}
-                            onClick={onClickAddNewMessage}> Add message </button>
-                </div>
             </div>
         )
     }
+let MessagesForm = (props: InjectedFormProps) => {
+    return (
+        <div className={s.buttonTextarea}>
+            <form onSubmit={props.handleSubmit}>
+            <Field  name='message' 
+                    type='text' 
+                    component='textarea'   
+                    placeholder='Enter your text' 
+                    className={s.textarea} />
+            <button className={s.button}> Send message </button>
+            </form>
+    </div>
+    )
+}
+let MessagesFormRedux = reduxForm({form: 'messagesForm'}) (MessagesForm)
