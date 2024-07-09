@@ -13,3 +13,11 @@ export const maxLengthCreator = (length: number) => (value: string)=> {
         return undefined
     }
 }
+export const minLengthCreator = (length: number) => (value: string)=> {
+
+    if (value.length < length){
+        return `field should be large than ${length} `
+    } else{
+        return undefined
+    }
+}

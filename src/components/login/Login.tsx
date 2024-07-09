@@ -3,20 +3,24 @@ import { AppRootStateType } from "../../redux/store-redux";
 import { connect } from "react-redux";
 import { logInTC } from "../../redux/authReducer";
 import { Redirect } from "react-router-dom";
+import { minLengthCreator, required } from "../../validators/validators";
+import { Input } from "../common/formControls/FormControls";
 
 export type FormLoginType = {email: string; password: string} | {}
+
+const minLength = minLengthCreator(8)
 
 let LoginForm: React.ComponentType<InjectedFormProps<{}, {}, string>> = (props) => {
 
     return <form onSubmit={props.handleSubmit} >
         <div>
-            <Field name="email" component="input" type="text" placeholder="Email" />
+            <Field name="email" component={Input} type="text" placeholder="Email" validate={[required]} />
         </div>
         <div>
-            <Field name="password" component="input" type="password" placeholder="Password" />
+            <Field name="password" component={Input} type="password" placeholder="Password" validate={[required, minLength ]} />
         </div>
         <div>
-            <Field name="rememberMe" component="input" type="checkbox" placeholder="Remember me" />
+            <Field name="rememberMe" component={Input} type="checkbox" placeholder="Remember me" />
         </div>
         <button> Send </button>
     </form>
@@ -30,13 +34,13 @@ const Login = (props: {logIn: (formData: FormLoginType)=> void, isAuth: boolean 
     if (props.isAuth){
         return <Redirect to={'/'} />
     }
-    const onSubmit: FormSubmitHandler = (formData: FormLoginType )=> {
+    const sendFormData: FormSubmitHandler = (formData: FormLoginType )=> {
         console.log(formData)
         props.logIn(formData)
     }
     return <div>
         <h1>Login</h1>
-        <LoginFormContainer onSubmit = {onSubmit} />
+        <LoginFormContainer onSubmit = {sendFormData} />
     </div>
 }
 
