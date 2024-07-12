@@ -32,7 +32,7 @@ export class ProfileStatus extends React.Component<ProfileStatusPropsType> {
         return <div>
             {this.state.editMode 
             ? <input value = {this.state.status} onChange = {this.onChangeStatus } onBlur={this.deactivateEditMode} autoFocus={true} type="text" /> 
-            : <span onDoubleClick={this.activateEditMode}>{this.props.status ? this.props.status : 'anything status should be here' }</span>}
+            : <span onDoubleClick={this.activateEditMode}>{this.props.status ? this.props.status : '---------' }</span>}
         </div>
 
     }

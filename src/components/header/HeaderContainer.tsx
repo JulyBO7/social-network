@@ -7,21 +7,12 @@ import { AppRootStateType } from "../../redux/store-redux"
 export type PropsType = {
     isAuth: boolean
     login: string
-    setAuth: () => void
     logOut: ()=> void
 }
 
 class HeaderContainer extends React.Component<PropsType>{
     constructor(props: PropsType) {
         super(props)
-    }
-    componentDidMount(): void {
-        this.props.setAuth()
-        // socialNetworkApi.setAuth()
-        //     .then(res => { 
-        //         if (res.data.resultCode == 0){
-        //             this.props.setAuth(res.data.data)
-        //         } })
     }
     render() {
         return <Header {...this.props} />
@@ -35,5 +26,5 @@ const mapStateToProps = (state: AppRootStateType) => {
         login: state.auth.login
     }
 }
-export default connect(mapStateToProps, { setAuth: setAutnTC, logOut: logOutTC })(HeaderContainer)
+export default connect(mapStateToProps, { logOut: logOutTC })(HeaderContainer)
 

@@ -15,7 +15,7 @@ type PropsType = {
     currentPage: number
     isFetching: boolean
     toggleFollowingProcess: number []
-    isAuth: boolean
+    // isAuth: boolean
     // setUsers: (users: UserItemType[]) => void
     changeUsersPage: (pageSize: number, currentPage?: number)=> void
     setTotalCount: (totalCount: number) => void
@@ -33,31 +33,14 @@ class UsersContainer extends React.Component<PropsType> {
     componentDidMount() {
         if (this.props.users.length === 0) {
             this.props.changeUsersPage(this.props.pageSize)
-
-            // this.props.changeIsFetching(true)
-            // socialNetworkApi.setUsers(this.props.pageSize)
-            //     .then((response) => {
-            //         this.props.setUsers(response.data.items)
-            //         this.props.setTotalCount(response.data.totalCount)
-            //         this.props.changeIsFetching(false)
-            //     })
         }
     }
     componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<{}>, snapshot?: any): void {
         if (this.props.currentPage !== prevProps.currentPage) {
             this.props.changeUsersPage(this.props.pageSize, this.props.currentPage )
-
-            // this.props.changeIsFetching(true)
-            // socialNetworkApi.setUsers(this.props.pageSize, this.props.currentPage)
-            //     .then(response => {
-            //         this.props.setUsers(response.data.items)
-            //         this.props.changeIsFetching(false)
-            //     })
         }
     }
     render() {
-        
-
         return <Users   users={this.props.users}
                         totalCount={this.props.totalCount}
                         pageSize={this.props.pageSize}
@@ -68,7 +51,6 @@ class UsersContainer extends React.Component<PropsType> {
                         unfollowUser= {this.props.unfollowUser}
                         setCurrentPage={this.props.setCurrentPage} 
                         changeFollowingProgress={this.props.changeFollowingProgress} />
-
     }
 }
 
@@ -80,7 +62,6 @@ const mapStateToProps = (state: AppRootStateType) => {
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
         toggleFollowingProcess: state.usersPage.toggleFollowingProcess,
-        // isAuth: state.auth.isAuth
     }
 }
 
@@ -88,5 +69,5 @@ const mapStateToProps = (state: AppRootStateType) => {
 //                         changeFollowingProgress, unfollowUser: unfollowUserTC, followUser: followUserTC, changeUsersPage: setUsersTC}))(UsersContainer)
 
 
-export default withAuthRedirect(connect(mapStateToProps, {   setTotalCount, setCurrentPage, changeIsFetching,
-                                            changeFollowingProgress, unfollowUser: unfollowUserTC, followUser: followUserTC, changeUsersPage: setUsersTC})(UsersContainer))
+export default connect(mapStateToProps, {   setTotalCount, setCurrentPage, changeIsFetching,
+                                            changeFollowingProgress, unfollowUser: unfollowUserTC, followUser: followUserTC, changeUsersPage: setUsersTC})(UsersContainer)

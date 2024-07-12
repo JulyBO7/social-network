@@ -5,35 +5,33 @@ import { AppRootStateType } from "../../../redux/store-redux";
 import { UserProfile, UserProfileType, changeStatus, changeUserProfileTC, getProfileStatus, setUserProfile } from "../../../redux/profileReducer";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { StaticContext } from "react-router";
+import { withAuthRedirect } from "../../../hoc/withAuthRedirect";
 
 type ProfileInfoContainerPropsType = {
     userProfile: UserProfile
     status: string
+    authorizedUserId: number | null
     setUserProfile: (profile: UserProfileType)=> void 
-    changeUserProfileTC: (userId: number)=> void
-    getProfileStatus: (userId: number) => void
+    changeUserProfileTC: (userId: number | null)=> void
+    getProfileStatus: (userId: number | null) => void
     changeStatus: (statusText: string)=> void
 }
 
-class ProfileInfoContainer extends React.Component<ProfileInfoContainerPropsType & RouteComponentProps<any, StaticContext, unknown>>{
-    // static propTypes = {
-    //     match: PropTypes.object.isRequired,
-    //     location: PropTypes.object.isRequired,
-    //     history: PropTypes.object.isRequired,
-    // };
+class ProfileInfoContainer extends React.Component<ProfileInfoContainerPropsType & RouteComponentProps<{userId: string}, StaticContext, unknown>>{
+
     componentDidMount(): void {
-        let userId = this.props.match.params.userId
+        let userId = Number(this.props.match.params.userId) as number | null
+        // console.log('isExact:',this.props.match.isExact, 'path:',this.props.match.path, 'url:',this.props.match.url)
+        // console.log('прочитала из profileContainerj:', this.props.isAuth)
         if (!userId){
-            userId = 29874
+            userId = this.props.authorizedUserId
+            if (!userId) this.props.history.push('/login')
         }
         this.props.changeUserProfileTC(userId)
         this.props.getProfileStatus(userId)
-        console.log ('ProfileInfoContainer')
-        // this.props.changeStatus('Мой статус')
     }
     render (){
         return <ProfileInfo profile = {this.props.userProfile} status = {this.props.status} updateStatus = {this.props.changeStatus}/>
-
     }
 }
 
@@ -42,7 +40,7 @@ let WithRouterProfileInfoContainer = withRouter(ProfileInfoContainer)
 const mapStateToProps = (state: AppRootStateType)=> {
     return {
         userProfile: state.profilePage.userProfile,
-        isAuth: state.auth.isAuth,
+        authorizedUserId: state.auth.id,
         status: state.profilePage.status
     }
 }

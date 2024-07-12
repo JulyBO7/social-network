@@ -2,12 +2,12 @@ import axios from "axios"
 import { UserItemType } from "../redux/usersReducer"
 import { FormLoginType } from "../components/login/Login"
 
-const settings = {withCredentials: true, baseURL: 'https://social-network.samuraijs.com/api/1.0/' }
+const settings = {withCredentials: true, baseURL: 'https://social-network.samuraijs.com/api/1.0/', headers: {'API-KEY': 'de9dfb38-bbeb-4144-92bb-c678d03a06f8'} }
 const instanse = axios.create(settings)
 
 export const usersApi = {
-    setAuth(){
-        return authApi.setAuth()
+    me(){
+        return authApi.me()
     },
     setUsers(pageSize: number, countPage: number = 1) {
         return instanse.get<ResponseGetUsersType>(`users?count=${pageSize}&page=${countPage}`)
@@ -23,7 +23,7 @@ export const usersApi = {
     }
 }
 export const authApi = {
-    setAuth(){
+    me(){
         return instanse.get<ResponseType<AuthType>>('auth/me')
     }, 
     logIn (payload: FormLoginType){

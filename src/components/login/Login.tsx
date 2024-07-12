@@ -32,7 +32,7 @@ let LoginFormContainer = reduxFormHoc(LoginForm)
 const Login = (props: {logIn: (formData: FormLoginType)=> void, isAuth: boolean }) => {
     console.log ('LoginProps:',props)
     if (props.isAuth){
-        return <Redirect to={'/'} />
+        return <Redirect to={'/profile'} />
     }
     const sendFormData: FormSubmitHandler = (formData: FormLoginType )=> {
         console.log(formData)

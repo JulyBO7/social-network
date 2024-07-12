@@ -18,7 +18,7 @@ export type ProfileActionType =  AddPostActionType
                         | UpdateStatusActionType
 
 export type UserProfileType = {
-    userId: number
+    userId: number | null
     fullName: string
     photos: { small: string, large: string }
     aboutMe: string | null
@@ -90,20 +90,24 @@ export const setProfileStatus = (status: string)=> ({type: 'SET-PROFILE-STATUS' 
 export const updateStatus = (status: string)=> ({type: 'CHANGE-STATUS', status} as const)
 
 //TC:
-export const changeUserProfileTC = (userId: number) => {
+export const changeUserProfileTC = (userId: number | null) => {
     return (dispatch: Dispatch) => {
-        profileApi.setProfile(userId)
+        if (userId){
+            profileApi.setProfile(userId)
             .then(res => {
                 dispatch(setUserProfile(res.data))
             })
+        }
     }
 }
-export const getProfileStatus = (userId: number) => {
+export const getProfileStatus = (userId: number | null) => {
     return (dispatch: Dispatch) => {
-        profileApi.getStatus(userId)
+        if (userId){
+            profileApi.getStatus(userId)
             .then(res => {
                 dispatch(setProfileStatus(res.data))
             })
+        } 
     }
 }
 export const changeStatus = (status: string) => {
