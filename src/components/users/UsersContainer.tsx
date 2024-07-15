@@ -5,6 +5,7 @@ import { UserItemType, changeFollowingProgress, followUserTC, setUsersTC, unfoll
 import { Users } from "./Users"
 import { changeIsFetching, setCurrentPage, setTotalCount, setUsers } from "../../redux/usersReducer"
 import { withAuthRedirect } from "../../hoc/withAuthRedirect"
+import { setUsersSelector } from "../../redux/selectors/usersSelector"
 
 const defaultImage = 'https://cdn-icons-png.flaticon.com/512/3177/3177440.png'
 
@@ -30,6 +31,7 @@ class UsersContainer extends React.Component<PropsType> {
     constructor(props: PropsType) {
         super(props)
     }
+    
     componentDidMount() {
         if (this.props.users.length === 0) {
             this.props.changeUsersPage(this.props.pageSize)
@@ -40,6 +42,7 @@ class UsersContainer extends React.Component<PropsType> {
             this.props.changeUsersPage(this.props.pageSize, this.props.currentPage )
         }
     }
+    
     render() {
         return <Users   users={this.props.users}
                         totalCount={this.props.totalCount}
@@ -56,7 +59,7 @@ class UsersContainer extends React.Component<PropsType> {
 
 const mapStateToProps = (state: AppRootStateType) => {
     return {
-        users: state.usersPage.users,
+        users: setUsersSelector(state),
         totalCount: state.usersPage.totalCount,
         pageSize: state.usersPage.pageSize,
         currentPage: state.usersPage.currentPage,

@@ -26,7 +26,6 @@ export const Users: React.FC<PropsType> = (props) => {
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
-
     return (
         <div>
             <div className={style.preloader} >{props.isFetching ? <img src={proloader} /> : null}</div>

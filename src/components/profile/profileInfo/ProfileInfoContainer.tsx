@@ -5,6 +5,7 @@ import { AppRootStateType } from "../../../redux/store-redux";
 import { UserProfile, UserProfileType, changeStatus, changeUserProfile, getProfileStatus, setUserProfile } from "../../../redux/profileReducer";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { StaticContext } from "react-router";
+import { setAuthorizedUserIdSelector, setUserProfileSelector, setUserStatusSelector} from "../../../redux/selectors/profileSelectors";
 
 type ProfileInfoContainerPropsType = {
     userProfile: UserProfile
@@ -37,9 +38,9 @@ let WithRouterProfileInfoContainer = withRouter(ProfileInfoContainer)
 
 const mapStateToProps = (state: AppRootStateType)=> {
     return {
-        userProfile: state.profilePage.userProfile,
-        authorizedUserId: state.auth.id,
-        status: state.profilePage.status
+        userProfile: setUserProfileSelector(state),
+        authorizedUserId: setAuthorizedUserIdSelector(state),
+        status: setUserStatusSelector(state)
     }
 }
 export default connect (mapStateToProps, {setUserProfile, changeUserProfile, getProfileStatus, changeStatus})(WithRouterProfileInfoContainer)
