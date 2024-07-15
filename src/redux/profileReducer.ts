@@ -90,7 +90,7 @@ export const setProfileStatus = (status: string)=> ({type: 'SET-PROFILE-STATUS' 
 export const updateStatus = (status: string)=> ({type: 'CHANGE-STATUS', status} as const)
 
 //TC:
-export const changeUserProfileTC = (userId: number | null) => {
+export const changeUserProfile = (userId: number | null) => {
     return (dispatch: Dispatch) => {
         if (userId){
             profileApi.setProfile(userId)

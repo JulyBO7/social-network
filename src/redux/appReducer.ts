@@ -22,7 +22,7 @@ export const setIsInitialized = () => ({
 export const initializeTC = () => {
     return (dispatch: AppDispatchType) => {
         let dispatchResult = dispatch(setAutnTC())
-        debugger
+        
         dispatchResult.then(()=> {
             dispatch(setIsInitialized())
         })

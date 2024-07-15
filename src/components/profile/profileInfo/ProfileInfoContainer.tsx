@@ -2,23 +2,21 @@ import { connect } from "react-redux";
 import { ProfileInfo } from "./ProfileInfo";
 import React from "react";
 import { AppRootStateType } from "../../../redux/store-redux";
-import { UserProfile, UserProfileType, changeStatus, changeUserProfileTC, getProfileStatus, setUserProfile } from "../../../redux/profileReducer";
+import { UserProfile, UserProfileType, changeStatus, changeUserProfile, getProfileStatus, setUserProfile } from "../../../redux/profileReducer";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { StaticContext } from "react-router";
-import { withAuthRedirect } from "../../../hoc/withAuthRedirect";
 
 type ProfileInfoContainerPropsType = {
     userProfile: UserProfile
     status: string
     authorizedUserId: number | null
     setUserProfile: (profile: UserProfileType)=> void 
-    changeUserProfileTC: (userId: number | null)=> void
+    changeUserProfile: (userId: number | null)=> void
     getProfileStatus: (userId: number | null) => void
     changeStatus: (statusText: string)=> void
 }
 
 class ProfileInfoContainer extends React.Component<ProfileInfoContainerPropsType & RouteComponentProps<{userId: string}, StaticContext, unknown>>{
-
     componentDidMount(): void {
         let userId = Number(this.props.match.params.userId) as number | null
         // console.log('isExact:',this.props.match.isExact, 'path:',this.props.match.path, 'url:',this.props.match.url)
@@ -27,7 +25,7 @@ class ProfileInfoContainer extends React.Component<ProfileInfoContainerPropsType
             userId = this.props.authorizedUserId
             if (!userId) this.props.history.push('/login')
         }
-        this.props.changeUserProfileTC(userId)
+        this.props.changeUserProfile(userId)
         this.props.getProfileStatus(userId)
     }
     render (){
@@ -44,4 +42,4 @@ const mapStateToProps = (state: AppRootStateType)=> {
         status: state.profilePage.status
     }
 }
-export default connect (mapStateToProps, {setUserProfile, changeUserProfileTC, getProfileStatus, changeStatus})(WithRouterProfileInfoContainer)
+export default connect (mapStateToProps, {setUserProfile, changeUserProfile, getProfileStatus, changeStatus})(WithRouterProfileInfoContainer)

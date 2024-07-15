@@ -25,7 +25,7 @@ class App extends React.Component<Props>{
   }
 
   render (){
-    if(!this.props.initialize) return <Preloader/>
+    if(!this.props.isInitialized) return <Preloader/>
     return (
       <BrowserRouter>
       <div className="App">
