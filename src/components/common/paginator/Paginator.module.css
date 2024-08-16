@@ -1,0 +1,20 @@
+.carrentPage{
+    font-weight:600;
+  }
+  .paginator{
+    align-self: center;
+  }
+  .btn{
+    background-color: rgba(226, 251, 226, 0.696);
+    outline: none;
+    border: none;
+  }
+  .btn:hover{
+    background-color:  rgba(190, 220, 190, 0.451);
+  }
+  .btn img {
+    width: 10px;
+    background-color: #ffffff00;
+
+  }
+  

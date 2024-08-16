@@ -9,7 +9,7 @@ import { setUsersSelector } from "../../redux/selectors/usersSelector"
 
 const defaultImage = 'https://cdn-icons-png.flaticon.com/512/3177/3177440.png'
 
-type PropsType = {
+type Props = {
     users: UserItemType[]
     totalCount: number
     pageSize: number
@@ -27,8 +27,8 @@ type PropsType = {
     changeFollowingProgress: (userId: number, isProcessing: boolean) => void 
 
 }
-class UsersContainer extends React.Component<PropsType> {
-    constructor(props: PropsType) {
+class UsersContainer extends React.Component<Props> {
+    constructor(props: Props) {
         super(props)
     }
     
@@ -37,7 +37,7 @@ class UsersContainer extends React.Component<PropsType> {
             this.props.changeUsersPage(this.props.pageSize)
         }
     }
-    componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<{}>, snapshot?: any): void {
+    componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<{}>, snapshot?: any): void {
         if (this.props.currentPage !== prevProps.currentPage) {
             this.props.changeUsersPage(this.props.pageSize, this.props.currentPage )
         }
@@ -59,7 +59,7 @@ class UsersContainer extends React.Component<PropsType> {
 
 const mapStateToProps = (state: AppRootStateType) => {
     return {
-        users: setUsersSelector(state),
+        users: state.usersPage.users,
         totalCount: state.usersPage.totalCount,
         pageSize: state.usersPage.pageSize,
         currentPage: state.usersPage.currentPage,

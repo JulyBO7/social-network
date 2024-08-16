@@ -122,6 +122,7 @@ export const setUsersTC = (pageSize: number, currentPage?: number)=> {
         dispatch(changeIsFetching(true))
         usersApi.setUsers(pageSize,currentPage)
             .then((response) => {
+                // debugger
                 dispatch(setUsers(response.data.items))
                 dispatch(setTotalCount(response.data.totalCount))
                 dispatch(changeIsFetching(false))

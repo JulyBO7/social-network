@@ -24,5 +24,15 @@
 }
 .preloader {
   margin-left: auto;
-    margin-right: auto;
-  }
+  margin-right: auto;
+}
+.users{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  /*align-items: ; */
+}
+.usersContainer{
+ height: 100%;
+}

@@ -27,7 +27,6 @@ class App extends React.Component<Props>{
   render (){
     if(!this.props.isInitialized) return <Preloader/>
     return (
-      <BrowserRouter>
       <div className="App">
         <HeaderContainer />
         <Menu />
@@ -38,7 +37,6 @@ class App extends React.Component<Props>{
           <Route path='/login' render={() => < Login />}></Route>
         </div>
       </div>
-    </BrowserRouter>
     )
   }
 }
