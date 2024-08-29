@@ -5,6 +5,7 @@ export type ProfilePageType = {
     userProfile: UserProfile
     posts: PostsType
     status: string
+    isOwner: boolean
 }
 export type PostsType = PostType[]
 export type PostType = {
@@ -52,7 +53,8 @@ export let store: StoreType = {
                 { id: '2', message: 'How are you?', likesCount: 4 },
                 { id: '3', message: 'How is your trainy?', likesCount: 7 }
             ],
-            status: ''
+            status: '',
+            isOwner: false
         },
         dialogsPage: {
             dialogs: [
@@ -87,7 +89,7 @@ export let store: StoreType = {
     } 
 }
 
-export default store
+// export defaultstore
 
 //функции AC импортируются напрямую в компонент, в котором вызываются, а не прокидываются через объект props
 

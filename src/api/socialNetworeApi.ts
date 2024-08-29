@@ -42,13 +42,19 @@ export const profileApi = {
     },
     updateStatus(payload: {status: string}){
         return instanse.put<ResponseType>(`profile/status`, payload )
+    }, 
+    setPhoto(file: FormData){
+        return instanse.put<ResponseType<{photos: {large: string, small: string}}>>('profile/photo', file)
     }
 }
+
 
 type ResponseType<D = {}> = {
     resultCode: number
     messages: string[]
     data: D
+    fieldsErrors: string[]
+
 }
 type ResponseGetUsersType = {
     items: UserItemType[]

@@ -1,9 +1,23 @@
 .profileInfoContainer img{
     width: 200px;
 }
-
-
-
+.imageUploads input{
+    display: none;
+}
+.imageUploads label{
+    border-radius: 5px;
+    background-color: rgb(133, 153, 133);
+    padding: 2px;
+}
+.imageUploads label:hover{
+    background-color: rgb(93, 111, 93);
+}
+.profileData p{
+    font-weight: 500;
+}
+.contactItem{
+    margin-left: 7px;
+}
 
 
 

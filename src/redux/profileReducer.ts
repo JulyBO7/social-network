@@ -2,6 +2,7 @@ import { Dispatch } from "redux"
 import { AddMessageAction } from "./dialogsReducer"
 import { profileApi} from "../api/socialNetworeApi"
 import { v1 } from "uuid"
+import { AppRootStateType } from "./store-redux"
 
 export type PostType = {
     id: string
@@ -9,11 +10,12 @@ export type PostType = {
     likesCount: number
 }
 export type ProfileActionType =  AddPostActionType 
-                        // | UpdateNewPostActionType
+                        | SetPhotoActionType
                         | AddMessageAction 
                         | SetUserProfileActionType
                         | SetProfileStatusActionType
                         | UpdateStatusActionType
+                        | SetIsOwneerActionType
 
 export type UserProfileType = {
     userId: number | null
@@ -38,6 +40,7 @@ type ProfileState = {
     userProfile: UserProfile
     posts: Array<PostType>
     status: string
+    isOwner: boolean
 }                  
 const initialState: ProfileState = {
     userProfile: { 
@@ -55,7 +58,8 @@ const initialState: ProfileState = {
         message: 'some post...',
         likesCount: 0
     }],
-    status: ''
+    status: '', 
+    isOwner: false
 }
 
 export const profileReducer = (state = initialState, action: ProfileActionType): ProfileState => {
@@ -71,6 +75,10 @@ export const profileReducer = (state = initialState, action: ProfileActionType):
             return { ...state, status: action.status }
         case 'CHANGE-STATUS':
             return { ...state, status: action.status }
+        case 'SET-PHOTO':
+                return { ...state, userProfile: {...state.userProfile, photos: action.photos} }
+        case 'SET-IS-OWNER':
+                return { ...state, isOwner: action.value }
         default: return state
     }
 }
@@ -81,7 +89,8 @@ export type AddPostActionType = ReturnType<typeof addPostAC>
 export type SetUserProfileActionType = ReturnType<typeof setUserProfile>
 export type SetProfileStatusActionType = ReturnType<typeof setProfileStatus >
 export type UpdateStatusActionType = ReturnType<typeof updateStatus >
-
+export type SetPhotoActionType = ReturnType<typeof setPhoto >
+export type SetIsOwneerActionType = ReturnType<typeof setIsOwner >
 
 //AC:
 export const addPostAC = (newPost: string) => ({ type: 'ADD-POST', newPost}) as const
@@ -93,11 +102,14 @@ export const setUserProfile = (profile: UserProfileType) => {
 }
 export const setProfileStatus = (status: string)=> ({type: 'SET-PROFILE-STATUS' , status} as const)
 export const updateStatus = (status: string)=> ({type: 'CHANGE-STATUS', status} as const)
-
+const setPhoto = (photos: {small: string, large: string})=> ({type: 'SET-PHOTO', photos} as const)
+const setIsOwner = (value: boolean)=>  ({type: 'SET-IS-OWNER', value} as const)
 //TC:
 export const changeUserProfile = (userId: number | null) => {
-    return (dispatch: Dispatch) => {
+    return (dispatch: Dispatch, getState: () => AppRootStateType) => {
         if (userId){
+            const isOwner = getState().auth.id === userId
+            dispatch(isOwner ? setIsOwner(true) : setIsOwner(false))
             profileApi.setProfile(userId)
             .then(res => {
                 dispatch(setUserProfile(res.data))
@@ -127,4 +139,13 @@ export const changeStatus = (status: string) => {
                 }
             })
     }
+}
+export const changePhoto = (photo: File) => (dispatch: Dispatch) => {
+    let formData = new FormData()
+    formData.append('image', photo)
+    profileApi.setPhoto(formData).then(res=> {
+        if(res.data.resultCode === 0){
+            dispatch(setPhoto(res.data.data.photos))
+        }
+    })
 }

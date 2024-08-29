@@ -12,3 +12,6 @@ export const setAuthorizedUserIdSelector = (state: AppRootStateType)=> {
 export const setUserStatusSelector = (state: AppRootStateType)=> {
     return state.profilePage.status
 }
+export const setIsOwnerSelector = (state: AppRootStateType)=> {
+    return state.profilePage.isOwner
+}
