@@ -8,8 +8,6 @@ export type PostType = {
     message: string
     likesCount: number
 }
-// type InitialStateType = typeof initialState 
-
 export type ProfileActionType =  AddPostActionType 
                         // | UpdateNewPostActionType
                         | AddMessageAction 
@@ -19,8 +17,8 @@ export type ProfileActionType =  AddPostActionType
 
 export type UserProfileType = {
     userId: number | null
-    fullName: string
-    photos: { small: string, large: string }
+    fullName: string | null
+    photos: { small: string | null, large: string | null}
     aboutMe: string | null
     contacts?: {
         facebook: string | null
@@ -36,15 +34,22 @@ export type UserProfileType = {
     lookingForAJobDescription: null | string
 }
 export type UserProfile = UserProfileType
-type ProfileStateType = {
+type ProfileState = {
     userProfile: UserProfile
     posts: Array<PostType>
     status: string
-}
-                    
-const initialState: ProfileStateType = {
-    userProfile:
-    { userId: 0, fullName: '', photos: { small: '', large: '' }, aboutMe: null, lookingForAJob: null, lookingForAJobDescription: null },
+}                  
+const initialState: ProfileState = {
+    userProfile: { 
+        userId: null, 
+        fullName: null, 
+        photos: { 
+            small: null, 
+            large: null
+        }, 
+        aboutMe: null, 
+        lookingForAJob: null, 
+        lookingForAJobDescription: null },
     posts: [{
         id: v1(),
         message: 'some post...',
@@ -53,7 +58,7 @@ const initialState: ProfileStateType = {
     status: ''
 }
 
-export const profileReducer = (state = initialState, action: ProfileActionType): ProfileStateType => {
+export const profileReducer = (state = initialState, action: ProfileActionType): ProfileState => {
     switch (action.type) {
         case 'ADD-POST':
             const newId = v1()

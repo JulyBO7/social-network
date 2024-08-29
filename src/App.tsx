@@ -10,7 +10,6 @@ import Login from './components/login/Login';
 import { AppRootStateType } from './redux/store-redux';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { FC } from 'react';
 import { Preloader } from './components/common/preloader/Preloader';
 import React from 'react';
 import { initializeTC } from './redux/appReducer';

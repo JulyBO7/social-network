@@ -3,7 +3,7 @@ import { ProfileInfo } from "./ProfileInfo";
 import React from "react";
 import { AppRootStateType } from "../../../redux/store-redux";
 import { UserProfile, UserProfileType, changeStatus, changeUserProfile, getProfileStatus, setUserProfile } from "../../../redux/profileReducer";
-import { RouteComponentProps, withRouter } from "react-router-dom";
+import { Redirect, RouteComponentProps, withRouter } from "react-router-dom";
 import { StaticContext } from "react-router";
 import { setAuthorizedUserIdSelector, setUserProfileSelector, setUserStatusSelector} from "../../../redux/selectors/profileSelectors";
 
@@ -18,16 +18,28 @@ type ProfileInfoContainerPropsType = {
 }
 
 class ProfileInfoContainer extends React.Component<ProfileInfoContainerPropsType & RouteComponentProps<{userId: string}, StaticContext, unknown>>{
-    componentDidMount(): void {
+    componentDidMount() {
+        debugger
         let userId = Number(this.props.match.params.userId) as number | null
-        // console.log('isExact:',this.props.match.isExact, 'path:',this.props.match.path, 'url:',this.props.match.url)
-        // console.log('прочитала из profileContainerj:', this.props.isAuth)
+        
         if (!userId){
             userId = this.props.authorizedUserId
             if (!userId) this.props.history.push('/login')
         }
         this.props.changeUserProfile(userId)
         this.props.getProfileStatus(userId)
+    }
+    componentDidUpdate(prevProps: Readonly<ProfileInfoContainerPropsType & RouteComponentProps<{ userId: string; }, StaticContext, unknown>>, prevState: Readonly<{}>){
+        if (prevProps.match.params.userId !== this.props.match.params.userId ){
+            let userId = Number(this.props.match.params.userId) as number | null
+            debugger
+            if (!userId){
+                userId = this.props.authorizedUserId
+                if (!userId) this.props.history.push('/login')
+            }
+            this.props.changeUserProfile(userId)
+            this.props.getProfileStatus(userId)
+        }
     }
     render (){
         return <ProfileInfo profile = {this.props.userProfile} status = {this.props.status} updateStatus = {this.props.changeStatus}/>

@@ -13,9 +13,13 @@ type StateAuthType = {
 export type AuthActionsType = SetAuthActionType | setIsLogoutInActionType
 export type SetAuthActionType = ReturnType<typeof setAuthAC>
 export type setIsLogoutInActionType = ReturnType<typeof setLogOutInAC>
-// type ThunkDispatchType = Dispatch<AuthActionsType>
 
-const initialState: StateAuthType = { id: 0, email: '', login: '', isAuth: false }
+const initialState: StateAuthType = { 
+    id: 0, 
+    email: '', 
+    login: '', 
+    isAuth: false 
+}
 
 export const authReducer = (state = initialState, action: AuthActionsType): StateAuthType=> {
     switch (action.type) {
@@ -28,7 +32,6 @@ export const authReducer = (state = initialState, action: AuthActionsType): Stat
         }
         default: return state
     }
-
 }
 
 export const setAuthAC = (data: AuthType) => {return {type: 'SET-AUTH', data} as const}
